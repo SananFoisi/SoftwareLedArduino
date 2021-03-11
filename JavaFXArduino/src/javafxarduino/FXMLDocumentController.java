@@ -6,6 +6,7 @@
 package javafxarduino;
 
 import com.fazecast.jSerialComm.SerialPort;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -63,6 +64,13 @@ public class FXMLDocumentController implements Initializable {
             btnConectar.setText("Conectar");
         }
 
+    }
+
+    @FXML
+    private void ligarLed() {
+        PrintWriter output = new PrintWriter(porta.getOutputStream());
+        output.print("1");
+        output.flush();
     }
 
 }
