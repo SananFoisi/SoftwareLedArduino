@@ -5,11 +5,13 @@
  */
 package javafxarduino;
 
+import com.fazecast.jSerialComm.SerialPort;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
 /**
@@ -17,19 +19,27 @@ import javafx.scene.control.Label;
  * @author rhyan
  */
 public class FXMLDocumentController implements Initializable {
-    
+
     @FXML
-    private Label label;
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+    private ComboBox cbPortas;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+        carregarPortas();
+    }
+
+    private void carregarPortas() {
+        SerialPort[] portNames = SerialPort.getCommPorts();
+
+        for (SerialPort portName : portNames) {
+
+            cbPortas.getItems().add(portName.getSystemPortName());
+        
+
+
+        
+        }
+
+    }
 }
