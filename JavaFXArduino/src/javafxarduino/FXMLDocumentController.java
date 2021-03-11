@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
@@ -22,6 +23,11 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private ComboBox cbPortas;
+
+    @FXML
+    private Button btnConectar;
+
+    private SerialPort porta;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -35,11 +41,28 @@ public class FXMLDocumentController implements Initializable {
         for (SerialPort portName : portNames) {
 
             cbPortas.getItems().add(portName.getSystemPortName());
-        
 
-
-        
         }
 
     }
+
+    @FXML
+    private void conectar() {
+        //System.out.println("teste");
+        if (btnConectar.getText().equals("Conectar")) {
+            porta = SerialPort.getCommPort(cbPortas.getSelectionModel().getSelectedItem().toString());
+
+            if (porta.openPort()) {
+                btnConectar.setText("Desconectar");
+                cbPortas.setDisable(true);
+            }
+
+        } else {
+            porta.closePort();
+            cbPortas.setDisable(false);
+            btnConectar.setText("Conectar");
+        }
+
+    }
+
 }
