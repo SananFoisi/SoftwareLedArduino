@@ -1,6 +1,7 @@
 int statusLed = 0; //LIGADO OU DESLIGADO
 const int LED = 12; //PINO LED
 
+
 void setup() {
 
   Serial.begin(9600); //taxa de tranferencia
